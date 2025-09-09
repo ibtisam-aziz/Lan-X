@@ -1916,21 +1916,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const sliderWrapper = document.getElementById('sliderWrapper');
@@ -1954,16 +1939,20 @@
             sliderWrapper.style.animationDuration = animationDuration + 's';
 
             // View All Toggle
+            // View All Toggle
             viewAllBtn.addEventListener('click', function () {
                 sliderWrapper.classList.add('paused');
                 const sliderSection = document.querySelector('.slider-section');
                 sliderSection.classList.add('fade-out');
                 viewAllBtn.classList.add('fade-out');
-
                 setTimeout(() => {
                     sliderSection.style.display = 'none';
                     viewAllBtn.style.display = 'none';
 
+                    // 🔄 Clear existing content in gridView FIRST
+                    gridView.innerHTML = '';
+
+                    // ➕ Then, append ONLY the 6 boxes from the template
                     for (let i = 0; i < 6; i++) {
                         const originalBox = templateBoxes[i].cloneNode(true);
                         gridView.appendChild(originalBox);
@@ -2107,5 +2096,6 @@
 
 
 </body>
+
 
 </html>
