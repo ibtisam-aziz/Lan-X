@@ -2093,9 +2093,66 @@
             }
         }
     </script>
+       <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function applyAnimationIfDesktop() {
+                const targetSpan = document.querySelector('div.banner.textalign > span');
+                if (!targetSpan) return;
+
+                // Get current window width
+                const windowWidth = window.innerWidth;
+
+                // If screen width is 1000px or less, show text as-is without animation
+                if (windowWidth <= 1000) {
+                    return; // Do nothing, leave text as original
+                }
+
+                // Store the original full text
+                const fullText = targetSpan.textContent.trim();
+                // Clear the span to rebuild it with animated characters
+                targetSpan.textContent = '';
+
+                // Create individual spans for each character
+                for (let i = 0; i < fullText.length; i++) {
+                    const char = fullText.charAt(i);
+
+                    if (char === ' ') {
+                        // Preserve spaces as text nodes (no animation)
+                        targetSpan.appendChild(document.createTextNode(' '));
+                    } else {
+                        // Wrap non-space characters in span for animation
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        charSpan.classList.add('pop-in');
+                        // Staggered animation delay for each character
+                        charSpan.style.animationDelay = (i * 60) + 'ms';
+                        targetSpan.appendChild(charSpan);
+                    }
+                }
+            }
+
+            // Run on page load
+            applyAnimationIfDesktop();
+
+            // Also run on window resize (optional, for dynamic behavior)
+            let resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    // Reload page if crossing the 1000px boundary for simplicity
+                    // (Alternatively, you could re-render the text without animation)
+                    if ((window.innerWidth <= 1000 && window.innerWidth + 1 > 1000) ||
+                        (window.innerWidth > 1000 && window.innerWidth - 1 <= 1000)) {
+                        location.reload();
+                    }
+                }, 250);
+            });
+        });
+    </script>
 
 
 </body>
 
 
 </html>
+
