@@ -321,7 +321,7 @@ nav ul li a{
   margin-left: -3px;
 }
 .banner{
-    padding: 0 85px;;
+    padding: 0 60px;;
 }
 .banner span{
     font-size: 64px;
@@ -1594,5 +1594,30 @@ display: flex ;
 }
 
 
+/* CSS for the pop-in animation */
+.pop-in {
+    display: inline-block;
+    animation: popIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+    opacity: 0;
+    transform: scale(0.3) translateY(15px);
+    /* Optional: Add tiny letter-spacing if needed, but usually not required */
+    letter-spacing: normal;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(15px);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-3px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
 
 
